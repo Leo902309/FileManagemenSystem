@@ -7,6 +7,7 @@ public class StartApplication {
 	    {
 		 System.out.println("doining a commit 1 in master branch");
 		 System.out.println("Creating commit 2 in master branch");
+		 System.out.println("Making commit 1 in hotfix branch");
 		 Service service=new Service();
 	     Scanner scan = new Scanner(System.in);
 		 while(true) {
