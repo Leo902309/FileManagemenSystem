@@ -5,7 +5,7 @@ import java.util.Scanner;
 public class StartApplication {
 	 public static void main(String[] args) 
 	    {
-		 System.out.println("commiting code in branch 1");
+		 System.out.println("doining a commit 1 in master branch");
 		 Service service=new Service();
 	     Scanner scan = new Scanner(System.in);
 		 while(true) {
