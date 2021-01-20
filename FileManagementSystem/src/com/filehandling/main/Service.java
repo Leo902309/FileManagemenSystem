@@ -8,6 +8,7 @@ import java.util.Scanner;
 public class Service {
 	FileOperation fileOperation=null;
 	Scanner scanner=null;
+	
 	public Service() {
 		fileOperation=new FileOperation();
 		scanner=new Scanner(System.in);
@@ -67,21 +68,25 @@ public class Service {
 	}
 	 public void options(int option) {
 		 switch (option) {
+		 case 0:
+			    System.out.println("Thanks for using FileManagement System,Bye Bye!");
+				System.exit(1);
+				break;
 		case 1:
-			this.addFile();
+			this.viewFiles();
+			
 			break;
 		case 2:
-			this.deleteFile();
+			this.otherOperations(this.scanner);
 			break;
 		case 3:
-			this.searchFile();
+			this.addFile();
 			break;
 		case 4:
-			this.viewFiles();
+			this.deleteFile();
 			break;
 		case 5:
-			System.out.println("Thanks for using FileManagement System,Bye Bye!");
-			System.exit(1);
+			this.searchFile();
 			break;
 		case 6:
 			this.menuList(this.scanner);
@@ -95,14 +100,22 @@ public class Service {
 	public void menuList(Scanner scan) {
 		System.out.println("\nWelcome To File Management System Develeoped by : A. Ansari");
 		System.out.println("***********************************************************\n");
-		System.out.println("Enter 1 to add a file");
-		System.out.println("Enter 2 to delete a file");
-		System.out.println("Enter 3 to search a file");
-		System.out.println("Enter 4 to get all files");
-		System.out.println("Enter 5 to exit");
+		System.out.println("Enter 1 to view all files");
+		System.out.println("Enter 2 to other operations");
+		System.out.println("Enter 0 to close the applications");
+		
 		int option = scan.nextInt();
 		options(option);
-		
+	}
+	
+	public void otherOperations(Scanner scanner) {
+		System.out.println("Enter 3 to add a file");
+		System.out.println("Enter 4 to delete a file");
+		System.out.println("Enter 5 to search a file");
+		System.out.println("Enter 6 for main menu");
+		System.out.println("Enter 0 to exit");
+		int option = scanner.nextInt();
+		options(option);
 	}
 	public void takeInput() {
 		System.out.println("\nEnter 0 to exit or enter 6 to go to main menu");

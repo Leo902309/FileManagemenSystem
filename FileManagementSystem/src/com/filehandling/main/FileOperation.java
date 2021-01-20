@@ -7,7 +7,9 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 
 
 public class FileOperation {
@@ -22,47 +24,56 @@ public class FileOperation {
 	 
 	 public boolean deleteFile(String fileName,String path) {
 		 File file = new File(path+"/"+fileName); 
-         
-	        if(file.delete()) 
-	        { 
-	           return true;
-	        } 
-	        else
-	        { 
-	        	return false;
-	        } 
+	     return file.delete(); 
 	 }
 	 
 	 public  void searchFile(String fileName,File file) {
 		 File[] list = file.listFiles();
-	        if(list!=null)
-	        for (File fil : list)
-	        {
-	            if (fil.isDirectory())
-	            {
-	            	searchFile(fileName,fil);
-	            }
-	            else if (fileName.equalsIgnoreCase(fil.getName()))
-	            {
-	                System.out.println("Path :"+fil.getParentFile());
-	            }
+	        if(list!=null) {
+	        	for (File fil : list)
+		        {
+		            if (fil.isDirectory())
+		            {
+		            	searchFile(fileName,fil);
+		            }
+		            else if (fileName.equals(fil.getName()))
+		            {
+		                System.out.println("Path :"+fil.getParentFile());
+		            }
+		        }
+	        }else {
+	        	 System.out.println("No File Found..");
 	        }
 	 }
 	 
 	 public void getFileNamesInAscOrder(String path) {
-		File file=new File(path);
-		if( file.exists()) {
-			 File[]files=file.listFiles();
-	         Arrays.sort(files);
-	         for(File f:files) {
-	        	 System.out.println(f.getName());
-	         }
-		}else {
-			System.out.println("Invalid path..");
-		}
-		
-
+		 ArrayList<String>listFiles=new ArrayList<>();
+		 listf(path,listFiles);
+		 if(!listFiles.isEmpty()) {
+			 listFiles.forEach(file->{
+				 System.out.println(file);
+			 });
+		 }else {
+			 System.out.println("No File Found..");
+		 }
 	 }
+	 
+
+		public ArrayList<String> listf(String directoryName, ArrayList<String>listFiles) {
+		    File directory = new File(directoryName);
+		    // Get all files from a directory.
+		    File[] fList = directory.listFiles();
+		    if(fList != null)
+		        for (File file : fList) {      
+		            if (file.isFile()) {
+		            	listFiles.add(file.getAbsolutePath());
+		            } else if (file.isDirectory()) {
+		                listf(file.getAbsolutePath(),listFiles);
+		            }
+		        }
+		    Collections.sort(listFiles);
+		    return listFiles;
+		   }
 	 
 	
 }
